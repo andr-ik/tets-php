@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - 1080:80
+    volumes:
+      - './:/code'
+      - './.docker/nginx.conf:/etc/nginx/conf.d/default.conf'
+    links:
+      - php
+  php:
+    container_name: php
+    build: ./.docker
+    ports:
+      - '9000:9000'
+    volumes:
+      - './:/code'
+    links:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    #restart: always
+    ports:
+      - 5440:5432
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: null
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+    driver: local
