@@ -18,4 +18,23 @@ class HistoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, History::class);
     }
+
+    public function findAllGroupByFlat(): array
+    {
+        $result = [];
+        $histories = $this->findAll();
+
+        foreach ($histories as $history) {
+            if (!isset($result[$history->getFlat()->getId()])) {
+                $result[$history->getFlat()->getId()] = [];
+            }
+            if (!isset($result[$history->getFlat()->getId()][$history->getDate()->format('Y-m-d')])) {
+                $result[$history->getFlat()->getId()][$history->getDate()->format('Y-m-d')] = [];
+            }
+
+            $result[$history->getFlat()->getId()][$history->getDate()->format('Y-m-d')] = $history;
+        }
+
+        return $result;
+    }
 }

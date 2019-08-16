@@ -1,0 +1,20 @@
+{
+  "name": "tets-php",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:andr-ik/tets-php.git",
+  "author": "Andrey Mikhailov <a.s.mikhailov@propellerads.net>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/animations": "^8.1.2",
+    "@angular/cdk": "^8.1.1",
+    "@angular/cli": "^8.1.2",
+    "@angular/material": "^8.1.1",
+    "bootstrap": "4.3.1",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
+  }
+}

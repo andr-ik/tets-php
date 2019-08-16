@@ -29,6 +29,11 @@ class Complex
     private $url;
 
     /**
+     * @ORM\Column(type="integer", unique=true)
+     */
+    private $externalId;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Flat", mappedBy="complex", orphanRemoval=true)
      */
     private $flats;
@@ -65,6 +70,16 @@ class Complex
         $this->url = $url;
 
         return $this;
+    }
+
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId($externalId): void
+    {
+        $this->externalId = $externalId;
     }
 
     /**

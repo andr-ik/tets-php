@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Flat</th>
+            {% for date in dateInterval %}
+            <th scope="col">{{ date | date("Y-m-d") }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for flat in historyCollection.flats %}
+            <tr>
+                <td scope="row">{{ flat.id }}</td>
+                {% for index, date in dateInterval %}
+                    <td>
+                        {% set price = historyCollection.getPrice(flat, date) %}
+                        {% set diff = historyCollection.getComparePrice(flat, date) %}
+
+                        {{ price }}<br/>
+                        {% if index > 0 and diff != 0 %}
+                        <span style="color: {{ diff > 0 ? 'red' : 'green' }}; font-size: 12px;">{{ diff > 0 ? '+' : '-' }} {{ diff|abs }}</span>
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
